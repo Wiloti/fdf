@@ -23,7 +23,10 @@ void	debugmap(t_map	map)
 int		main(int argc, char **argv)
 {
 	t_map	map;
+	t_data	d;
 
+	d.mlx_ptr = mlx_init();
+	d.win_ptr = mlx_new_window(d.mlx_ptr, 1000, 1000, argv[1]);
 	if (argc != 2)
 		return (0);
 	map = parse(argv[1]);
