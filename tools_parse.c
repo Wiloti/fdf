@@ -10,10 +10,7 @@ int		count_word(char *str)
 	while (str[i])
 	{
 		if (!ft_strchr(" \t0123456789+-", str[i]))
-		{
-			ft_putstr("Nique toi et ton fichier de merde laaaaaaaaaaaaaaaaaaaaaa\n");
-			exit (-12213);
-		}
+			exit (0);
 		while (str[i] == ' ' || str[i] == '\t')
 			i++;
 		if (str[i] == '+' || str[i] == '-' || ft_isdigit((int)str[i]))
@@ -65,20 +62,14 @@ t_map	parse(char	*filename)
 		if (map.width == -1)
 			map.width = count_word(line);
 		else if (map.width != count_word(line))
-		{
-			ft_putstr("Lignes irregulieeeeeres\n");
-			exit (420);
-		}
+			exit (0);
 		map.tab = intdjoin(map.tab, map.height, map.width);
 		i = 0;
 		n = 0;
 		while (n < map.width)
 		{
 			if (!ft_strchr(" \t0123456789+-", line[i]))
-			{
-				ft_putstr("Nique toi et ton fichier de merde laaaaaaaaaaaaaaaaaaaaaa\n");
-				exit (-12213);
-			}
+				exit (0);
 			while (line[i] == ' ' ||  line[i] == '\t')
 				i++;
 			if (line[i] == '+'|| line[i] == '-' || ft_isdigit((int)line[i]))
