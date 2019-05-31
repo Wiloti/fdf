@@ -102,21 +102,42 @@ static void		drawline(int x1, int y1, int x2, int y2)
 	}
 }
 
+void	drawedges(t_map map, int i, int j)
+{
+	int	x;
+	int	y;
+	int	dx;
+	int	dy;
+	int	dh;
+
+	dx = 30;
+	dy = 50;
+	dh = 4;
+	x = i * dx + j * dx;
+	y = j * dy - map.tab[j][i] * dh;
+	if (i + 1 < map.width)
+		drawline(x, y, ((i + 1) * dx + j * dx), j * dy - map.tab[j][i + 1] * dh);
+	if (j + 1 < map.height)
+		drawline(x, y, i  * dx + (j + 1) * dx, (j + 1) * dy - map.tab[j + 1][i] * dh);
+	if (i + 1 < map.width && j + 1 < map.height)
+		drawline(x, y, ((i + 1) * dx + (j + 1) * dx), (j + 1) * dy - map.tab[j + 1][i + 1] * dh);
+}
+
 int		draw(t_data *d)
 {
-	int		x;
-	int		y;
+	int		i;
+	int		j;
 
-	y = 0;
-	while (y < d->map.height)
+	j = 0;
+	while (j < d->map.height)
 	{
-		x = 0;
-		while (x < d->map.width)
+		i = 0;
+		while (i < d->map.width)
 		{
-			pixel_put(x * 10, y * 10);
-			x++;
+			drawedges(d->map, i, j);
+			i++;
 		}
-		y++;
+		j++;
 	}
 	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img_ptr, 0, 0);
 	return (0);
